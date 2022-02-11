@@ -10,9 +10,15 @@ import javax.imageio.ImageIO;
 
 public class GameBoard implements Drawable, Updateable {
 	
-
+	boolean firstClick = true;
 	Image testImage, backImage;
-	public static final int OFFSET_X = 40, OFFSET_Y = 20;
+	Aces diamond, clubs, spades, hearts;
+	Bottom one, two, three, four, five, six, seven;
+	Deck deck;
+	Draw draw;
+	ArrayList<Point> clickableLoc = new ArrayList<>();
+	public static final int OFFSET_X = 40, OFFSET_Y = 20, CARD_X=80, CARD_Y=100;
+
 	
 	 
 	private int numdraws=0;
@@ -20,6 +26,7 @@ public class GameBoard implements Drawable, Updateable {
 	
 	
 	public GameBoard() {
+
 		try {
 			testImage = ImageIO.read(new File("images/cards/dj.png"));
 			backImage = ImageIO.read(new File("images/cards/b1fv.png"));
@@ -41,7 +48,9 @@ public class GameBoard implements Drawable, Updateable {
 		g.drawImage(testImage, 30, 80, null);
 		g.drawImage(backImage, 100, 80, null);
 		g.drawImage(backImage, 105, 100, null);
+		//drawPiles(g);
 	}
+
 
 
 	/**
@@ -53,6 +62,23 @@ public class GameBoard implements Drawable, Updateable {
 	 */
 	public void justClicked(MouseEvent me) {
 		Point p = me.getPoint();
+		int type;
+		for (int i=0; i<clickableLoc.size(); i++){
+			Point pon = clickableLoc.get(i);
+			if (pon.getX()-p.getX()<CARD_X){
+				if(pon.getY()-p.getY()<CARD_Y){
+					type=i;
+				}
+
+			}
+		}
+
+		if (firstClick){
+			firstClick=false;
+		}
+
+	
+		
 		System.out.println("You just clicked "+p);
 
 
