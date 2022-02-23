@@ -10,13 +10,13 @@ import javax.imageio.ImageIO;
 
 public class GameBoard implements Drawable, Updateable {
 	
-	boolean firstClick = true;
-	Image testImage, backImage;
-	Aces diamond, clubs, spades, hearts;
-	Bottom one, two, three, four, five, six, seven;
-	Deck deck;
-	Draw draw;
-	ArrayList<Point> clickableLoc = new ArrayList<>();
+	private boolean firstClick = true;
+	private Image testImage, backImage;
+	//private Aces diamond, clubs, spades, hearts;
+	private Bottom one, two, three, four, five, six, seven;
+	private Deck deck;
+	private Draw draw;
+	private ArrayList<Point> clickableLoc = new ArrayList<>();
 	public static final int OFFSET_X = 40, OFFSET_Y = 20, CARD_X=80, CARD_Y=100;
 
 	
@@ -26,7 +26,22 @@ public class GameBoard implements Drawable, Updateable {
 	
 	
 	public GameBoard() {
-
+		deck.shuffle();
+		one.add(deck.deal());
+		for (int i = 0; i < 2; i++)
+			two.add(deck.deal());
+		for (int i = 0; i < 3; i++)
+			three.add(deck.deal());
+		for (int i = 0; i < 4; i++)
+			four.add(deck.deal());
+		for (int i = 0; i < 5; i++)
+			five.add(deck.deal());
+		for (int i = 0; i < 6; i++)
+			six.add(deck.deal());
+		for (int i = 0; i < 7; i++)
+			seven.add(deck.deal());
+		for (int i = 0; i < 3; i++)
+			draw.add(deck.deal());
 		try {
 			testImage = ImageIO.read(new File("images/cards/dj.png"));
 			backImage = ImageIO.read(new File("images/cards/b1fv.png"));
