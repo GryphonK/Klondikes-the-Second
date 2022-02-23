@@ -22,7 +22,7 @@ public class Card implements Drawable, Updateable{
         faceDown = null;
         img = setImg();
     }
-
+    
     public int getSuit(){
         return suit;
     }
@@ -56,6 +56,7 @@ public class Card implements Drawable, Updateable{
     }
 
     public Image setImg(){
+        String jqk = "";
         Image result = null;
         String imgName = "";
         if(suit == 1)
@@ -66,8 +67,16 @@ public class Card implements Drawable, Updateable{
         imgName += "s";
         else
         imgName += "c";
-
-        imgName += ""+value;
+        if (this.value == 11)
+            jqk = "j";
+        if (this.value == 12)
+            jqk = "q";
+        if (this.value == 13)
+            jqk = "k";
+        if (this.value <= 10)
+            imgName += ""+value;
+        else 
+            imgName += ""+jqk;
         try {
 			result = ImageIO.read(new File("images/cards/"+imgName+".png"));
             faceDown = ImageIO.read(new File("images/cards/b1fv.png"));
@@ -91,4 +100,5 @@ public class Card implements Drawable, Updateable{
     public void update(ActionEvent a) {
 		//blank unless you want an animation
 	}
+
 }

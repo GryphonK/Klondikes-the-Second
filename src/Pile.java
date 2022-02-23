@@ -13,7 +13,15 @@ public abstract class Pile implements Drawable, Updateable {
     
     public abstract boolean canAddCard(Card c);
     private ArrayList<Card> list = new ArrayList<>();
-    private Point loc = new Point();
+    private Point loc = new Point(); 
+    public Card getTopCard() {
+        if (list.get(list.size())== null){
+            return null;
+        }
+        else {
+            return list.get(list.size());
+        }
+    }
     public Point getLocation(){
         return loc;
     }
